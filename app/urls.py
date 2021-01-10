@@ -14,9 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path, include
+
+
+def redirect_to_games_index(request):
+    return redirect('games:index')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('chat/', include('chat.urls')),
+    path('chat/', include('chat.urls', namespace='chat')),
+    path('games/', include('games.urls', namespace='games')),
+    path('', redirect_to_games_index)
 ]
