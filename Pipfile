@@ -9,6 +9,7 @@ channels = "==3.0.3"
 channels-redis = "==3.2.0"
 
 [dev-packages]
+selenium = "*"
 
 [requires]
 python_version = "3.9"
