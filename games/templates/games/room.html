@@ -3,5 +3,31 @@
 {% block title %}PlaneChaseWithFriends - Room {{ room_id }}{% endblock %}
 
 {% block content %}
+    <button id="send-event" class="button btn-primary">Send event</button>
+{% endblock %}
 
+{% block javascript %}
+    {{ room_id|json_script:"game-id" }}
+    <script>
+        const gameName = JSON.parse(document.getElementById('game-id').textContent);
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/game/'
+            + gameName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            console.log(e)
+        };
+
+        document.querySelector('#send-event').onclick = function (e) {
+            chatSocket.send(JSON.stringify({
+                'event': 'click',
+                'message': 'hello, world'
+            }));
+        }
+    </script>
 {% endblock %}
