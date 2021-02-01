@@ -3,7 +3,12 @@
 {% block title %}PlaneChaseWithFriends - Room {{ room_id }}{% endblock %}
 
 {% block content %}
-    <button id="send-event" class="button btn-primary">Send event</button>
+    <div class="h-100 row align-items-center">
+        <div class="col" style="text-align: center;">
+            <img src="{{ img_placeholder }}" style="transform: rotate(90deg);" class="img-fluid" alt="">
+            <button id="send-event" class="btn btn-primary">Send event</button>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascript %}

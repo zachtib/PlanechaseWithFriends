@@ -30,4 +30,19 @@ class GameConsumer(AsyncJsonWebsocketConsumer):
     async def receive_json(self, content, **kwargs):
         print(content)
 
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': content['message']
+            }
+        )
 
+    # Receive message from room group
+    async def chat_message(self, event):
+        message = event['message']
+
+        # Send message to WebSocket
+        await self.send_json({
+            'message': message,
+        })
